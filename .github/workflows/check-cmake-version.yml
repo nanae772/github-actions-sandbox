@@ -1,0 +1,24 @@
+name: Check cmake version
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  check-cmake-version:
+    strategy:
+      matrix:
+        os:
+          - windows-2019
+          - macos-13
+          - macos-14
+          - ubuntu-22.04
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Check cmake version
+        run: cmake --version
