@@ -20,5 +20,15 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: <Setup> Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install gnu-sed coreutils
+
+      - name: <Setup> Install ONNX Runtime dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y patchelf
+
       - name: Check cmake version
         run: cmake --version
